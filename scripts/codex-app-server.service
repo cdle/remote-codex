@@ -1,0 +1,17 @@
+[Unit]
+Description=Codex app-server with remote control (mobile app control)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root
+ExecStart=/root/.codex/packages/app-server-daemon/releases/0.163.0-aarch64-unknown-linux-musl/bin/codex app-server --remote-control --listen unix:// --analytics-default-enabled
+Restart=always
+RestartSec=5
+StandardOutput=append:/root/.codex/app-server-daemon/app-server.stdout.log
+StandardError=append:/root/.codex/app-server-daemon/app-server.stdout.log
+
+[Install]
+WantedBy=multi-user.target
